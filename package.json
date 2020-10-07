@@ -1,16 +1,12 @@
 {
-  "name": "@lsilletto/wattmatrix",
-  "version": "0.1.0",
-  "private": true,
+  "name": "wattmatrix",
+  "version": "0.1.6",
+  "private": false,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "boardgame.io": "^0.39.14",
+    "boardgame.io": "^0.40.0",
     "esm": "^3.2.25",
     "koa-static": "^5.0.0",
-    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-digraph": "^6.7.1",
     "react-dom": "^16.13.1",
@@ -26,7 +22,8 @@
     "dev-server": "ENV=dev nodemon --inspect --trace-warnings -r esm server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish:npm": "rm -rf dist && mkdir dist &&  babel src -d dist --copy-files"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,5 +39,33 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Clone of Powergrid",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
+  "babel": {
+    "presets": [
+      "@babel/react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "babel-preset-react-app": "^9.1.2",
+    "nodemon": "^2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sillle14/wattmatrix.git"
+  },
+  "author": "Lewis Silletto",
+  "license": "MIT"
 }
