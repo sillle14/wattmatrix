@@ -72,7 +72,7 @@
     user-select: none;
 }
 
-.powerplant-production > div, svg {
+.powerplant-production > div, .powerplant-production > svg {
     width: calc(80% / 3);
     height: 80%
 }

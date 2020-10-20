@@ -1,6 +1,6 @@
 {
   "name": "wattmatrix",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
