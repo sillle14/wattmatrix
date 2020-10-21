@@ -24,7 +24,7 @@
     grid-area: main;
     display: flex;
     flex-direction: column;
-    background-color: lightsteelblue;
+    background-color: #b3e5fc;
 }
 
 .main hr {
@@ -33,11 +33,11 @@
 }
 
 .selected {
-    outline: 5px solid orangered;
+    outline: 5px solid #f50057;
 }
 
 .tabs {
-    background-color: steelblue;
+    background-color: #0277bd;
     height: 48px;
 }
 

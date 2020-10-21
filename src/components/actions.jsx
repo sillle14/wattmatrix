@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '@material-ui/core';
 
 import { Bidder } from './bidder'
 import { PlayerName, ResourceName } from './names'
@@ -36,7 +37,7 @@ export default function ActionBar(props) {
             } else if (props.player.bureaucracy.toPower.length === 0) {
                 action = [
                     <span key="message">Choose powerplants to power using the player mat in the upper right.</span>,
-                    <button className="danger" key="pass" onClick={() => props.passPowering()}>Pass</button>
+                    <Button color="secondary" variant="contained" key="pass" onClick={() => props.passPowering()}>Pass</Button>
                 ]
             } else if (props.playerStages[props.playerID] === COIL_STAGE) {
                 const coilPlants = props.player.bureaucracy.toPower.filter(p => powerplants[p].resource === 'coil')
@@ -59,8 +60,8 @@ export default function ActionBar(props) {
                         ${props.player.bureaucracy.toPower.join(', ')} to power ${poweredCount} 
                         cit${poweredCount !== 1 ? 'ies': 'y'} for $${income}?`
                     }</span>,
-                    <button className="danger" key="power" onClick={() => props.power()}>Power</button>,
-                    <button key="clear" onClick={() => props.clearToPower()}>Clear</button>,
+                    <Button color="secondary" variant="contained" key="power" onClick={() => props.power()}>Power</Button>,
+                    <Button variant="contained" onClick={() => props.clearToPower()}>Clear</Button>,
                 ]
             }
             
@@ -74,7 +75,7 @@ export default function ActionBar(props) {
                 if (props.toDiscard) {
                     action = [
                         <span key="message">{`Discard powerplant ${props.toDiscard}? Note that you may need to discard excess resources.`}</span>,
-                        <button key="confirm" onClick={() => props.discardPP()}>Confirm</button>
+                        <Button color="secondary" variant="contained" key="confirm" onClick={() => props.discardPP()}>Confirm</Button>
                     ]
                 } else {
                     action = <span>Select a powerplant to discard.</span>
@@ -102,12 +103,12 @@ export default function ActionBar(props) {
                     if (!props.selectedPP) {
                         action = [
                             <span key="message">{`Select a powerplant${props.firstTurn ? '.' : ' or pass.'}`}</span>,
-                            <button className="danger" key="pass" onClick={() => props.passBuyPP()} disabled={props.firstTurn ? 'disabled' : ''}>Pass</button>
+                            <Button color="secondary" variant="contained" key="pass" onClick={() => props.passBuyPP()} disabled={props.firstTurn ? 'disabled' : ''}>Pass</Button>
                         ]
                     } else {
                         action = [
                             <span key="message">{`Start the bidding on powerplant ${props.selectedPP}?`}</span>,
-                            <button className="danger" key="confirm" onClick={() => props.startBidding()}>Confirm</button>
+                            <Button color="secondary" variant="contained" key="confirm" onClick={() => props.startBidding()}>Confirm</Button>
                         ]
                     }
                 } else {
@@ -116,20 +117,26 @@ export default function ActionBar(props) {
                 break
             case CITY:
                 if (Object.keys(props.selectedCities).length === 0) {
-                    action = [<span key="message">Select cities or pass.</span>, <button className="danger" key="pass" onClick={() => props.pass()}>Pass</button>]
+                    action = [
+                        <span key="message">Select cities or pass.</span>, 
+                        <Button color="secondary" variant="contained" key="pass" onClick={() => props.pass()}>Pass</Button>
+                    ]
                 } else {
                     const cities = Object.keys(props.selectedCities).join(', ')
                     const cost = Object.values(props.selectedCities).map(i => i.cost).reduce((a,b) => a+b, 0) + props.connectionCost
                     action = [
                         <span key="message">{`Buy ${cities} for $${cost}?`}</span>,
-                        <button className="danger" disabled={props.budget >= cost ? '' : 'disabled'} key="buy" onClick={() => props.buyCities()}>Buy</button>,
-                        <button key="clear" onClick={() => props.clearCities()}>Clear</button>,
+                        <Button color="secondary" variant="contained" disabled={props.budget >= cost ? '' : 'disabled'} key="buy" onClick={() => props.buyCities()}>Buy</Button>,
+                        <Button variant="contained" key="clear" onClick={() => props.clearCities()}>Clear</Button>,
                     ]
                 }
                 break
             case RESOURCE:
                 if (props.resourceCost === 0){
-                    action = [<span key="message">Select resources or pass.</span>, <button className="danger" key="pass" onClick={() => props.pass()}>Pass</button>]
+                    action = [
+                        <span key="message">Select resources or pass.</span>, 
+                        <Button color="secondary" variant="contained" key="pass" onClick={() => props.pass()}>Pass</Button>
+                    ]
                 } else {
                     let resources = []
                     for (const resource in props.selectedResources) {
@@ -139,8 +146,8 @@ export default function ActionBar(props) {
                     }
                     action = [
                         <span key="message">{'Buy '}{resources}{`for $${props.resourceCost}?`}</span>,
-                        <button className="danger" disabled={props.budget >= props.resourceCost ? '' : 'disabled'} key="buy" onClick={() => props.buyResources()}>Buy</button>,
-                        <button key="clear" onClick={() => props.clearResources()}>Clear</button>,
+                        <Button color="secondary" variant="contained" disabled={props.budget >= props.resourceCost ? '' : 'disabled'} key="buy" onClick={() => props.buyResources()}>Buy</Button>,
+                        <Button variant="contained" onClick={() => props.clearResources()}>Clear</Button>,
                     ]
                 }
                 break
@@ -152,8 +159,8 @@ export default function ActionBar(props) {
                     let titleCasedRegions = props.regions.map(r => r[0].toUpperCase() + r.slice(1))
                     action = [
                         <span key="message">{`Play in ${titleCasedRegions.join(', ')}?`}</span>,
-                        <button className="danger" disabled={props.regions.length === playerSettings[playerCount].regions ? '' : 'disabled'} key="buy" onClick={() => props.confirmRegions()}>Confirm</button>,
-                        <button key="clear" onClick={() => props.clearRegions()}>Clear</button>,
+                        <Button color="secondary" variant="contained" disabled={props.regions.length === playerSettings[playerCount].regions ? '' : 'disabled'} key="buy" onClick={() => props.confirmRegions()}>Confirm</Button>,
+                        <Button variant="contained" key="clear" onClick={() => props.clearRegions()}>Clear</Button>,
                     ]
                 }
                 break

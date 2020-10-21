@@ -1,5 +1,5 @@
 import React from 'react'
-import Slider from '@material-ui/core/Slider';
+import { Button, Slider } from '@material-ui/core'
 
 import { ResourceName } from './names'
 
@@ -33,11 +33,12 @@ export class CoilSlider extends React.Component {
             <ResourceName resource="oil" amount={this.props.total - this.state.coal}/>
             <Slider value={this.state.coal} onChange={this.handleChange} min={0} max={this.props.total} marks={true} classes={this.sliderClasses}/>
             <ResourceName resource="coal" amount={this.state.coal}/>
-            <button 
-                className="danger"
+            <Button 
+                color="secondary"
+                variant="contained"
                 onClick={() => this.props.confirm(this.state.coal, this.props.total - this.state.coal)} 
                 disabled={this.props.maxOil >= this.props.total - this.state.coal && this.props.maxCoal >= this.state.coal ? '' : 'disabled'}
-            >Confirm</button>
+            >Confirm</Button>
         </div>
         )
     }

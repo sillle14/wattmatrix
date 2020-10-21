@@ -1,9 +1,9 @@
 .logs {
-    background: lightsteelblue;
+    background: #b3e5fc;
     padding: 5%;
     height: 100%;
-    border-left: 5px solid lightslategray;
-    border-right: 5px solid lightslategray;
+    border-left: 5px solid #607d8b;
+    border-right: 5px solid #607d8b;
 }
 
 .log-break {

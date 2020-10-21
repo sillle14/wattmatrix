@@ -61,11 +61,11 @@ td {
 }
 
 .payment-table th:nth-child(even) {
-    background: lightskyblue
+    background: #4fc3f7
 }
 
 .payment-table th:nth-child(odd) {
-    background: darkblue;
+    background: #1a237e;
     color: white;
 }
 
@@ -87,7 +87,7 @@ td {
 }
 
 .refill-table th:not(:first-child) {
-    background-color: steelblue;
+    background-color: #0277bd;
 }
 
 .refill-table td:nth-child(2) {
@@ -112,12 +112,12 @@ td {
 }
 
 .other-table td:nth-child(1) {
-    background-color: steelblue;
+    background-color: #0277bd;
     text-align: right;
 }
 
 .other-table td:nth-child(2) {
-    background-color: darkblue;
+    background-color: #1a237e;
     color: white;
     text-align: center;
     padding-left: 0px;

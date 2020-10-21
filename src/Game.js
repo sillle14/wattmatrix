@@ -88,14 +88,8 @@ function setup(ctx, setupData) {
     }
 }
 
-// TODO:
-// *
-
-// TODO LONG TERM:
-// * Rewrite lobby -- this enables the below
-//    * Do we need logins?
-// * Save game -- use a free mongo add in to heroku, save all necessary in JSON, and add to setupData when loading a game.
-
+// TODO: 
+// * Fix colors
 
 export const WattMatrix = {
     name: 'WattMatrix',

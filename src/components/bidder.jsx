@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '@material-ui/core'
 
 import './styles/bidder.css'
 
@@ -25,8 +26,8 @@ export class Bidder extends React.Component {
             <div className="bidder">
                 <span>{`Bid more than ${this.props.currentBid} on PP ${this.props.powerplant} ${passAllowed ? 'or pass.' : ''}`}</span>
                 <input type="text" value={this.state.bid} onChange={this.handleChange}/>
-                <button className="danger" disabled={validBid ? '' : 'disabled'} onClick={() => this.props.makeBid(this.state.bid)}>{`Bid ${this.state.bid}`}</button>
-                <button className="danger" disabled={passAllowed ? '' : 'disabled'} onClick={() => this.props.pass()}>Pass</button>
+                <Button color="secondary" variant="contained" disabled={validBid ? '' : 'disabled'} onClick={() => this.props.makeBid(this.state.bid)}>{`Bid ${this.state.bid}`}</Button>
+                <Button color="secondary" variant="contained" disabled={passAllowed ? '' : 'disabled'} onClick={() => this.props.pass()}>Pass</Button>
             </div>
         )
     }

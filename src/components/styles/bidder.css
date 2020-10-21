@@ -11,4 +11,9 @@
     width: 7%;
     text-align: center;
     font-size: 1.7vw;
+    margin: 0 1%;
+}
+
+.bidder button {
+    margin: 0 1%;
 }

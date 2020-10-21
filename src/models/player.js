@@ -2,7 +2,7 @@ import { powerplants } from '../static/powerplants'
 
 class PlayerModel {
     constructor () {
-        this.cities = ['Boston']
+        this.cities = []
         this.resources = {coal: 0, oil: 0, trash: 0, uranium: 0}
         this.powerplants = []
         this.money = 50
