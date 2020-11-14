@@ -157,8 +157,9 @@ export function buyCities(G, ctx) {
 }
 
 export function endCities(G, ctx) {
-    // Remove too small powerplants from the game.
-    while (G.powerplantMarket[0] <= Math.min(...Object.values(G.players).map(p => p.cities.length))) {
+    // Remove too small powerplants from the game. 
+    // TODO: Test this
+    while (G.powerplantMarket[0] <= Math.max(...Object.values(G.players).map(p => p.cities.length))) {
         G.logs.push({move: 'removePP', removed: G.powerplantMarket[0]})
         removeLowest(G, ctx)
     }
@@ -179,7 +180,7 @@ export function endCities(G, ctx) {
     }
 }
 
-function removeLowest(G, ctx) {
+export function removeLowest(G, ctx) {
     // Remove the lowest powerplant from the game.
     const nextPlant = G.powerplantDeck.pop()
     if (nextPlant) {

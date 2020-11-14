@@ -82,8 +82,14 @@ function Log(props) {
             ]
             break
         case 'removePP': 
+            let reason
+            if (log.allPass) {
+                reason = <span key="header">All players have passed:</span>
+            } else {
+                reason = <span key="header">{`One player has ${log.removed} or more cities:`}</span>
+            }
             details = [
-                <span key="header">{`All players have ${log.removed} or more cities.`}</span>,
+                reason,
                 <br key="br"></br>,
                 <span key="remove">{indent}{`Powerplant ${log.removed} is removed from the game.`}</span>
             ]

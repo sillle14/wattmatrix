@@ -4,6 +4,8 @@ import { getPlayerOrder } from './common'
 
 import PlayerModel from '../models/player'
 
+import { removeLowest } from '../moves/cities'
+
 import { MARKETS } from '../gameStructure'
 import { DISCARD_PP, DISCARD_RESOURCES } from '../gameStructure'
 
@@ -11,7 +13,8 @@ export function startAuction(G, ctx) {
     G.auction = {
         upForAuction: null, 
         currentBid: null,
-        selected: null
+        selected: null,
+        allPass: true,
     }
     for (const playerID in G.players) {
         G.players[playerID].boughtPP = false
@@ -59,6 +62,9 @@ function afterBid(G, ctx) {
     if (playersLeft.length === 1) {
         const winningID = playersLeft[0]
         G.logs.push({playerID: winningID, move: 'buyPP', powerplant: G.auction.upForAuction, cost: G.auction.currentBid})
+
+        // At least one plant was bought, so not all players passed.
+        G.auction.allPass = false
 
         // Buy the powerplant.
         G.players[winningID].boughtPP = true
@@ -148,6 +154,11 @@ export function passBuyPP(G, ctx) {
 }
 
 export function afterAuction(G, ctx) {
+    // If all players passed, remove the lowest powerplant.
+    if (G.auction.allPass) {
+        G.logs.push({move: 'removePP', removed: G.powerplantMarket[0], allPass: true})
+        removeLowest(G, ctx)
+    }
     // Re-calculate player order if it is the first turn.
     if (G.firstTurn) {
         G.firstTurn = false

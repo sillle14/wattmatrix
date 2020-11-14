@@ -71,7 +71,7 @@ function setup(ctx, setupData) {
         logs: [{move: 'playerOrder', order: playerOrder, initial: true}],
         regions: [],
 
-        auction: {upForAuction: null, selected: null, currentBid: null, toDiscard: null},
+        auction: {upForAuction: null, selected: null, currentBid: null, toDiscard: null, allPass: true},
 
         selectedCities: {},
         connectionCost: 0,
@@ -87,9 +87,6 @@ function setup(ctx, setupData) {
         },
     }
 }
-
-// TODO: 
-// * Fix colors
 
 export const WattMatrix = {
     name: 'WattMatrix',
