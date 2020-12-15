@@ -1,19 +1,25 @@
 import React from 'react'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
+import { Tab, Tabs } from '@material-ui/core/'
 
-import Map from './map'
-import Market from './market'
-import ResourceMarket from './resourceMarket'
-import Reference from './reference'
-import ActionBar from './actions'
+import { 
+    BUREAUCRACY, 
+    CITY, 
+    COIL_STAGE, 
+    DISCARD_PP, 
+    MAP, 
+    MARKETS, 
+    REFERENCE, 
+    RESOURCE, 
+    REGIONS 
+} from '../gameStructure'
 import { Logs } from './logs'
 import { Players, Player}  from './players'
 import { TabLabel, TabPanel } from './tabHelpers'
-
-import { BUREAUCRACY, CITY, RESOURCE, REGIONS } from '../gameStructure'
-import { MAP, MARKETS, REFERENCE } from '../gameStructure'
-import { COIL_STAGE, DISCARD_PP } from '../gameStructure'
+import ActionBar from './actions'
+import Map from './map'
+import Market from './market'
+import Reference from './reference'
+import ResourceMarket from './resourceMarket'
 
 import './styles/board.css'
 

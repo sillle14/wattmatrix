@@ -1,8 +1,9 @@
-import { houseCosts, cities } from '../static/cities'
-import { edgeLookup } from '../static/edges'
-import { STEP_3 } from '../static/powerplants'
-import { playerSettings } from '../static/reference'
 import { INVALID_MOVE } from 'boardgame.io/core'
+
+import { edgeLookup } from '../static/edges'
+import { houseCosts, cities } from '../static/cities'
+import { playerSettings } from '../static/reference'
+import { STEP_3 } from '../static/powerplants'
 
 // Since the Infinity builtin is not JSON serializable, use a big constant instead.
 //  This just needs to be greater than all edge costs.
@@ -158,7 +159,6 @@ export function buyCities(G, ctx) {
 
 export function endCities(G, ctx) {
     // Remove too small powerplants from the game. 
-    // TODO: Test this
     while (G.powerplantMarket[0] <= Math.max(...Object.values(G.players).map(p => p.cities.length))) {
         G.logs.push({move: 'removePP', removed: G.powerplantMarket[0]})
         removeLowest(G, ctx)

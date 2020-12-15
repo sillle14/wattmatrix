@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PlayerName } from './names'
 import { payment, playerSettings } from '../static/reference'
+import { PlayerName } from './names'
 
 import './styles/symbols.css'
 import './styles/reference.css'

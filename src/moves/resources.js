@@ -1,4 +1,5 @@
 import { INVALID_MOVE } from 'boardgame.io/core'
+
 import PlayerModel from '../models/player'
 
 export function selectResource(G, ctx, resource) {

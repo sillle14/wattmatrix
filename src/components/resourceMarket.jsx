@@ -1,7 +1,7 @@
 import React from 'react'
 
-import './styles/symbols.css'
 import './styles/resourceMarket.css'
+import './styles/symbols.css'
 
 function Resource(props) {
     let className = 'resource market-resource resource-' + props.resource

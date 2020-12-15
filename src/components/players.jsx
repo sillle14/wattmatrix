@@ -1,9 +1,8 @@
 import React from 'react'
 
-import PowerPlant from './powerplant'
-import { PlayerName } from './names'
-
 import { playerColors } from '../static/playerColors'
+import { PlayerName } from './names'
+import PowerPlant from './powerplant'
 
 import './styles/player.css'
 import './styles/symbols.css'

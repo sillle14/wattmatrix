@@ -1,11 +1,11 @@
 import { ActivePlayers } from 'boardgame.io/core';
 
-import { pass } from './moves/common'
 import * as auction from './moves/auction'
-import * as cityMoves from './moves/cities'
-import * as resourceMoves from './moves/resources'
 import * as bureaucracy from './moves/bureaucracy'
+import * as cityMoves from './moves/cities'
 import * as region from './moves/regions'
+import * as resourceMoves from './moves/resources'
+import { pass } from './moves/common'
 
 // Turn order constant to have each player make one move in reverse player order.
 const REVERSE_ONCE = {

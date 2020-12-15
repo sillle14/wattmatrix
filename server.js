@@ -1,7 +1,8 @@
-import { Server } from 'boardgame.io/server';
-import path from 'path';
-import serve from 'koa-static';
-import { WattMatrix } from './src/Game';
+import { Server } from 'boardgame.io/server'
+import path from 'path'
+import serve from 'koa-static'
+
+import { WattMatrix } from './src/Game'
 
 const PORT = process.env.PORT || 8000;
 const server = Server({ games: [WattMatrix] })
@@ -20,7 +21,7 @@ if (SINGLE_PORT) {
                 next
             )
         )
-    });
+    })
 } else {
     server.run(PORT)
 }

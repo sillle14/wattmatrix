@@ -1,8 +1,10 @@
-import React from 'react'
 import { animateScroll } from 'react-scroll'
-import './styles/logs.css'
-import { PlayerName, ResourceName } from './names' 
+import React from 'react'
+
 import { payment, playerSettings } from '../static/reference'
+import { PlayerName, ResourceName } from './names' 
+
+import './styles/logs.css'
 
 const indent = <span key="span">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 

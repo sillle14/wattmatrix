@@ -1,10 +1,11 @@
+import { GraphView } from 'react-digraph'
 import React from 'react'
-import './styles/map.css'
+
 import { cities, houseCosts } from '../static/cities'
 import { edges } from '../static/edges'
 import { playerColors } from '../static/playerColors'
 
-import { GraphView } from 'react-digraph';
+import './styles/map.css'
 
 const regionColors = {
     northwest: '#f2bfff',

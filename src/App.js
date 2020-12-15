@@ -1,9 +1,10 @@
-import { Client } from 'boardgame.io/react';
-import { WattMatrixTable } from './components/board'
-import {WattMatrix} from './Game'
-import logger from 'redux-logger';
-import { applyMiddleware } from 'redux';
+import { applyMiddleware } from 'redux'
+import { Client } from 'boardgame.io/react'
 import { SocketIO } from 'boardgame.io/multiplayer'
+import logger from 'redux-logger'
+
+import { WattMatrix } from './Game'
+import { WattMatrixTable } from './components/board'
 
 // NOTE: Local multiplayer seems to mess up moves (they are taken twice)
 const WattMatrixClient = Client({

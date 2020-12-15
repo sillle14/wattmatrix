@@ -1,11 +1,10 @@
 import { cities } from './static/cities'
-import { powerplants, STEP_3 } from './static/powerplants'
+import { gamePhases } from './gameStructure'
+import { getPlayerOrder } from './moves/common'
 import { playerSettings } from './static/reference'
-
+import { powerplants, STEP_3 } from './static/powerplants'
 import PlayerModel from './models/player'
 
-import { getPlayerOrder } from './moves/common'
-import { gamePhases } from './gameStructure';
 
 
 function setup(ctx, setupData) {

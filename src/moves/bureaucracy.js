@@ -1,8 +1,8 @@
+import { INVALID_MOVE } from 'boardgame.io/core'
+
 import { getPlayerOrder } from './common'
 import { payment, playerSettings } from '../static/reference'
 import { powerplants, STEP_3 } from '../static/powerplants'
-import { INVALID_MOVE } from 'boardgame.io/core'
-
 import { REFERENCE, COIL_STAGE } from '../gameStructure'
 
 export function startBureaucracy(G, ctx) {

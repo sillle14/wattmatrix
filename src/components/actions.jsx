@@ -1,16 +1,13 @@
+import { Button } from '@material-ui/core'
 import React from 'react'
-import { Button } from '@material-ui/core';
 
+import { AUCTION, BUREAUCRACY, CITY, COIL_STAGE, DISCARD_PP, REGIONS, RESOURCE } from '../gameStructure'
 import { Bidder } from './bidder'
-import { PlayerName, ResourceName } from './names'
 import { CoilSlider } from './slider'
 import { payment, playerSettings } from '../static/reference'
+import { PlayerName, ResourceName } from './names'
 import { powerplants } from '../static/powerplants'
-
 import PlayerModel from '../models/player'
-
-import { AUCTION, BUREAUCRACY, CITY, REGIONS, RESOURCE } from '../gameStructure'
-import { COIL_STAGE, DISCARD_PP } from '../gameStructure'
 
 import './styles/action.css'
 

@@ -1,13 +1,11 @@
 import { INVALID_MOVE } from 'boardgame.io/core'
-import { STEP_3 } from '../static/powerplants'
-import { getPlayerOrder } from './common'
 
-import PlayerModel from '../models/player'
-
-import { removeLowest } from '../moves/cities'
-
-import { MARKETS } from '../gameStructure'
 import { DISCARD_PP, DISCARD_RESOURCES } from '../gameStructure'
+import { getPlayerOrder } from './common'
+import { MARKETS } from '../gameStructure'
+import { removeLowest } from '../moves/cities'
+import { STEP_3 } from '../static/powerplants'
+import PlayerModel from '../models/player'
 
 export function startAuction(G, ctx) {
     G.auction = {

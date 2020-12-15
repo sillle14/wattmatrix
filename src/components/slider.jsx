@@ -1,5 +1,5 @@
-import React from 'react'
 import { Button, Slider } from '@material-ui/core'
+import React from 'react'
 
 import { ResourceName } from './names'
 

@@ -1,7 +1,8 @@
 import React from 'react'
-import PowerPlant from './powerplant'
-import './styles/market.css'
 
+import PowerPlant from './powerplant'
+
+import './styles/market.css'
 
 export default function Market(props) {
     let powerplants = []
