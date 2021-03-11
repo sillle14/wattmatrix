@@ -1,8 +1,9 @@
-* {
+.board * {
     box-sizing: border-box;
 }
 
 .board {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 4fr 1fr;
     grid-template-rows: 82vh 10vh;

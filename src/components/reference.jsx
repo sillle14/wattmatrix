@@ -19,7 +19,7 @@ function Payment(props) {
     return (
         <div className="chart payment-chart">
             <span>Payment Reference</span>
-            <table className="payment-table">
+            <table className="reference-table payment-table">
                 <thead>
                     <tr><th>{house}</th><th>$</th><th>{house}</th><th>$</th><th>{house}</th><th>$</th></tr>
                 </thead>
@@ -42,7 +42,7 @@ function Refill(props) {
     return (
         <div className="chart refill-chart">
             <span>Refill Reference</span>
-            <table className="refill-table">
+            <table className="reference-table refill-table">
                 <thead>
                     <tr><th></th><th>S 1</th><th>S 2</th><th>S 3</th></tr>
                 </thead>
@@ -56,7 +56,7 @@ function Other(props) {
     return (
         <div className="chart other-chart">
             <span>Other Reference</span>
-            <table className="other-table">
+            <table className="reference-table other-table">
                 <thead><tr><th></th><th></th></tr></thead>
                 <tbody>
                     <tr><td>Current Step</td><td>{props.step}</td></tr>

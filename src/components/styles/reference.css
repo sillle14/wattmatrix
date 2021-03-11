@@ -18,7 +18,7 @@
     width: 100%;
 }
 
-table {
+.reference-table {
     table-layout: fixed;
     width: 100%;
 }
@@ -41,12 +41,16 @@ table {
     flex-basis: 24%;
 }
 
-th, td {
+.reference-table th, .reference-table td {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-td {
+.refill-table td:first-child {
+    padding-right: 0;
+}
+
+.reference-table td {
     font-size: 1.2vw;
 }
 

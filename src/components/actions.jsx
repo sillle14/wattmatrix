@@ -144,7 +144,7 @@ export default function ActionBar(props) {
                     action = [
                         <span key="message">{'Buy '}{resources}{`for $${props.resourceCost}?`}</span>,
                         <Button color="secondary" variant="contained" disabled={props.budget < props.resourceCost} key="buy" onClick={() => props.buyResources()}>Buy</Button>,
-                        <Button variant="contained" onClick={() => props.clearResources()}>Clear</Button>,
+                        <Button variant="contained" key="clear" onClick={() => props.clearResources()}>Clear</Button>,
                     ]
                 }
                 break
