@@ -26,8 +26,8 @@ export class Bidder extends React.Component {
             <div className="bidder">
                 <span>{`Bid more than ${this.props.currentBid} on PP ${this.props.powerplant} ${passAllowed ? 'or pass.' : ''}`}</span>
                 <input type="text" value={this.state.bid} onChange={this.handleChange}/>
-                <Button color="secondary" variant="contained" disabled={validBid ? '' : 'disabled'} onClick={() => this.props.makeBid(this.state.bid)}>{`Bid ${this.state.bid}`}</Button>
-                <Button color="secondary" variant="contained" disabled={passAllowed ? '' : 'disabled'} onClick={() => this.props.pass()}>Pass</Button>
+                <Button color="secondary" variant="contained" disabled={!validBid} onClick={() => this.props.makeBid(this.state.bid)}>{`Bid ${this.state.bid}`}</Button>
+                <Button color="secondary" variant="contained" disabled={!passAllowed} onClick={() => this.props.pass()}>Pass</Button>
             </div>
         )
     }

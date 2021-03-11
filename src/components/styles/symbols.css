@@ -8,6 +8,10 @@
     user-select: none;
 }
 
+.resource > .resource-selected {
+    background: white;
+}
+
 .resource-oil {
     background: black;
     clip-path: circle();
@@ -26,6 +30,10 @@
     background: rgb(255, 255, 45);
     clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
     color: black;
+}
+
+.resource-trash > .resource-selected {
+    background: black;
 }
 
 .resource-uranium {

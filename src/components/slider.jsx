@@ -37,7 +37,7 @@ export class CoilSlider extends React.Component {
                 color="secondary"
                 variant="contained"
                 onClick={() => this.props.confirm(this.state.coal, this.props.total - this.state.coal)} 
-                disabled={this.props.maxOil >= this.props.total - this.state.coal && this.props.maxCoal >= this.state.coal ? '' : 'disabled'}
+                disabled={this.props.maxOil < this.props.total - this.state.coal || this.props.maxCoal < this.state.coal}
             >Confirm</Button>
         </div>
         )

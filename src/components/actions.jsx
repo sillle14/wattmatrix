@@ -58,7 +58,7 @@ export default function ActionBar(props) {
                         cit${poweredCount !== 1 ? 'ies': 'y'} for $${income}?`
                     }</span>,
                     <Button color="secondary" variant="contained" key="power" onClick={() => props.power()}>Power</Button>,
-                    <Button variant="contained" onClick={() => props.clearToPower()}>Clear</Button>,
+                    <Button variant="contained" key="clear" onClick={() => props.clearToPower()}>Clear</Button>,
                 ]
             }
             
@@ -100,7 +100,7 @@ export default function ActionBar(props) {
                     if (!props.selectedPP) {
                         action = [
                             <span key="message">{`Select a powerplant${props.firstTurn ? '.' : ' or pass.'}`}</span>,
-                            <Button color="secondary" variant="contained" key="pass" onClick={() => props.passBuyPP()} disabled={props.firstTurn ? 'disabled' : ''}>Pass</Button>
+                            <Button color="secondary" variant="contained" key="pass" onClick={() => props.passBuyPP()} disabled={props.firstTurn}>Pass</Button>
                         ]
                     } else {
                         action = [
@@ -123,7 +123,7 @@ export default function ActionBar(props) {
                     const cost = Object.values(props.selectedCities).map(i => i.cost).reduce((a,b) => a+b, 0) + props.connectionCost
                     action = [
                         <span key="message">{`Buy ${cities} for $${cost}?`}</span>,
-                        <Button color="secondary" variant="contained" disabled={props.budget >= cost ? '' : 'disabled'} key="buy" onClick={() => props.buyCities()}>Buy</Button>,
+                        <Button color="secondary" variant="contained" disabled={props.budget < cost} key="buy" onClick={() => props.buyCities()}>Buy</Button>,
                         <Button variant="contained" key="clear" onClick={() => props.clearCities()}>Clear</Button>,
                     ]
                 }
@@ -143,7 +143,7 @@ export default function ActionBar(props) {
                     }
                     action = [
                         <span key="message">{'Buy '}{resources}{`for $${props.resourceCost}?`}</span>,
-                        <Button color="secondary" variant="contained" disabled={props.budget >= props.resourceCost ? '' : 'disabled'} key="buy" onClick={() => props.buyResources()}>Buy</Button>,
+                        <Button color="secondary" variant="contained" disabled={props.budget < props.resourceCost} key="buy" onClick={() => props.buyResources()}>Buy</Button>,
                         <Button variant="contained" onClick={() => props.clearResources()}>Clear</Button>,
                     ]
                 }
@@ -156,7 +156,7 @@ export default function ActionBar(props) {
                     let titleCasedRegions = props.regions.map(r => r[0].toUpperCase() + r.slice(1))
                     action = [
                         <span key="message">{`Play in ${titleCasedRegions.join(', ')}?`}</span>,
-                        <Button color="secondary" variant="contained" disabled={props.regions.length === playerSettings[playerCount].regions ? '' : 'disabled'} key="buy" onClick={() => props.confirmRegions()}>Confirm</Button>,
+                        <Button color="secondary" variant="contained" disabled={props.regions.length !== playerSettings[playerCount].regions} key="buy" onClick={() => props.confirmRegions()}>Confirm</Button>,
                         <Button variant="contained" key="clear" onClick={() => props.clearRegions()}>Clear</Button>,
                     ]
                 }

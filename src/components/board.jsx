@@ -48,12 +48,15 @@ export class WattMatrixTable extends React.Component {
 
     render () {
         // Preliminary calculations
-        const myTurn = this.props.playerID === this.props.ctx.currentPlayer
-        const activePlayer = myTurn || (this.props.ctx.activePlayers && this.props.playerID in this.props.ctx.activePlayers)
+        // It is the players turn if they are the current player and there are no active players, or it's bureaucracy and no one is active.
+        const myTurn = (
+            (this.props.playerID === this.props.ctx.currentPlayer && !this.props.ctx.activePlayers) ||
+            (this.props.ctx.phase === BUREAUCRACY && !this.props.G.players[this.props.playerID].bureaucracy.hasPowered)
+        )
         const discardStage = this.props.ctx.activePlayers && Object.values(this.props.ctx.activePlayers).includes(DISCARD_PP)
         const tabs = [MAP, MARKETS, REFERENCE].map(
             (tab) => {
-                const warning = activePlayer && this.state.tab !== tab && this.props.G.tab === tab
+                const warning = myTurn && this.state.tab !== tab && this.props.G.tab === tab
                 return <Tab classes={warning ? {root: 'alert-tab'} : {}} key={tab} icon={<TabLabel label={tab} warning={warning}/>} value={tab}/>
             }
         )
@@ -93,6 +96,7 @@ export class WattMatrixTable extends React.Component {
                             resourceMarket={this.props.G.resourceMarket}
                             selectResource={this.props.moves.selectResource}
                             clickable={myTurn && this.props.ctx.phase === RESOURCE}
+                            selectedResources={this.props.G.selectedResources}
                         />
                     </TabPanel>
                     <TabPanel tab={REFERENCE} currentTab={this.state.tab}>
