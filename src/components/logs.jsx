@@ -123,7 +123,7 @@ export class Logs extends React.Component {
     }
 
     scrollToBottom = () => {
-        animateScroll.scrollToBottom({containerId: `${this.props.playerID}-log`, duration: 0});
+        animateScroll.scrollToBottom({containerId: `${this.props.playerID || 'spec'}-log`, duration: 0});
     }
     
     componentDidMount() { this.scrollToBottom() }
@@ -148,7 +148,7 @@ export class Logs extends React.Component {
             <div className="logs">
                 <span>Game Log:</span>
                 <hr className="log-break"></hr>
-                <div className="scroll" id={`${this.props.playerID}-log`}>
+                <div className={`scroll${!!!this.props.playerID ? ' spectator' : ''}`} id={`${this.props.playerID || 'spec'}-log`}>
                     {logs}
                 </div>
             </div>

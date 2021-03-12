@@ -15,6 +15,7 @@ if (NO_LOBBY) {
   // Code for local deployment no lobby both players on one screen, no seperate server.
   ReactDOM.render(
     <React.StrictMode>
+      {/* <WattMatrixClient playerID={null}/> */}
       <WattMatrixClient playerID='0'/>
       <WattMatrixClient playerID='1'/>
       <WattMatrixClient playerID='2'/>

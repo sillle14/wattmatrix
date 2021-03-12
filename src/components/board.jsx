@@ -49,9 +49,10 @@ export class WattMatrixTable extends React.Component {
     render () {
         // Preliminary calculations
         // It is the players turn if they are the current player and there are no active players, or it's bureaucracy and no one is active.
+        const notPowered = !!this.props.playerID && !this.props.G.players[this.props.playerID].bureaucracy.hasPowered
         const myTurn = (
             (this.props.playerID === this.props.ctx.currentPlayer && !this.props.ctx.activePlayers) ||
-            (this.props.ctx.phase === BUREAUCRACY && !this.props.G.players[this.props.playerID].bureaucracy.hasPowered)
+            (this.props.ctx.phase === BUREAUCRACY && notPowered)
         )
         const discardStage = this.props.ctx.activePlayers && Object.values(this.props.ctx.activePlayers).includes(DISCARD_PP)
         const tabs = [MAP, MARKETS, REFERENCE].map(
@@ -63,11 +64,11 @@ export class WattMatrixTable extends React.Component {
         // Player PPs are clickable if they are in the discard phase or if it is bureaucracy and they haven't yet powered.
         const playerPPClickable = (discardStage && this.props.playerID in this.props.ctx.activePlayers) || 
             (this.props.ctx.phase === BUREAUCRACY 
-                && !this.props.G.players[this.props.playerID].bureaucracy.hasPowered
+                && notPowered
                 && this.props.ctx.activePlayers[this.props.playerID] !== COIL_STAGE)
         return (
             <div className="board">
-                <div className="main" id={'main-' + this.props.playerID}>
+                <div className="main" id={'main-' + (this.props.playerID || 'spec')}>
                     <Tabs className="tabs" value={this.state.tab} onChange={(e, tab) => {this.switchToTab(tab)}} centered>{tabs}</Tabs>
                     <TabPanel tab={MAP} currentTab={this.state.tab}>
                         <Map 
@@ -113,14 +114,14 @@ export class WattMatrixTable extends React.Component {
                     </TabPanel>
                 </div>
                 <div className="sidebar">
-                    <Player 
+                    {!!this.props.playerID ? <Player 
                         player={this.props.G.players[this.props.playerID]} 
                         playerID={this.props.playerID} 
                         playerMap={this.playerMap}
                         selectPP={discardStage ? this.props.moves.selectToDiscard : this.props.moves.selectToPower}
                         selectedPP={discardStage && this.props.ctx.activePlayers[this.props.playerID] ? this.props.G.auction.toDiscard : null}
                         clickablePP={playerPPClickable}
-                    />
+                    /> : null}
                     <Logs logs={this.props.G.logs} playerMap={this.playerMap} playerID={this.props.playerID}/>
                 </div>
                 <ActionBar
@@ -132,7 +133,7 @@ export class WattMatrixTable extends React.Component {
                     playerStages={this.props.ctx.activePlayers}
                     phase={this.props.ctx.phase}
                     firstTurn={this.props.G.firstTurn}
-                    budget={this.props.G.players[this.props.playerID].money}
+                    budget={!!this.props.playerID && this.props.G.players[this.props.playerID].money}
                     pass={this.props.moves.pass}
                     gameover={this.props.ctx.gameover}
 

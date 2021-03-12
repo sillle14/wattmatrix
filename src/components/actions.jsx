@@ -14,7 +14,10 @@ import './styles/action.css'
 export default function ActionBar(props) {
     let action
     let myTurn = true
-    if (props.gameover) {
+    if (!!!props.playerID) {
+        myTurn = false
+        action = <span>{'You are spectating. '}<PlayerName playerID={props.currentPlayer} playerMap={props.playerMap}/>{ ' is taking their turn.'}</span>
+    } else if (props.gameover) {
         const winners = props.gameover.winnerIDs
         if (winners.length === 1) {
             action = <span><PlayerName playerID={winners[0]} playerMap={props.playerMap}/>{ 'wins!'}</span>
