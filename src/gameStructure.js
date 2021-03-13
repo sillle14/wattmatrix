@@ -1,4 +1,4 @@
-import { ActivePlayers } from 'boardgame.io/core';
+import { ActivePlayers } from 'boardgame.io/core'
 
 import * as auction from './moves/auction'
 import * as bureaucracy from './moves/bureaucracy'
