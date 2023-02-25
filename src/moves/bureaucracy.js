@@ -5,7 +5,7 @@ import { payment, playerSettings } from '../static/reference'
 import { powerplants, STEP_3 } from '../static/powerplants'
 import { REFERENCE, COIL_STAGE } from '../gameStructure'
 
-export function startBureaucracy(G, ctx) {
+export function startBureaucracy({G}) {
     G.logs.push({move: 'startPhase', phase: 'Bureaucracy'})
     G.tab = REFERENCE
     for (const playerID in G.players) {
@@ -13,8 +13,8 @@ export function startBureaucracy(G, ctx) {
     }
 }
 
-export function selectToPower(G, ctx, powerplant) {
-    const player = G.players[ctx.playerID]
+export function selectToPower({G, playerID}, powerplant) {
+    const player = G.players[playerID]
     if (player.bureaucracy.hasPowered === true) {
         return INVALID_MOVE
     }
@@ -54,15 +54,15 @@ export function selectToPower(G, ctx, powerplant) {
     )
 }
 
-function _endPower(G, ctx) {
-    G.logs.push({playerID: ctx.playerID, move: 'power', count: G.players[ctx.playerID].bureaucracy.poweredCount})
-    G.players[ctx.playerID].money += payment[G.players[ctx.playerID].bureaucracy.poweredCount]
-    G.players[ctx.playerID].bureaucracy.toPower = []
-    G.players[ctx.playerID].bureaucracy.hasPowered = true
+function _endPower(G, playerID) {
+    G.logs.push({playerID: playerID, move: 'power', count: G.players[playerID].bureaucracy.poweredCount})
+    G.players[playerID].money += payment[G.players[playerID].bureaucracy.poweredCount]
+    G.players[playerID].bureaucracy.toPower = []
+    G.players[playerID].bureaucracy.hasPowered = true
 }
 
-export function power(G, ctx) {
-    const player = G.players[ctx.playerID]
+export function power({G, events, playerID}) {
+    const player = G.players[playerID]
     // Spend the resources for non-coil plants.
     for (let i = 0; i < player.bureaucracy.toPower.length; i++) {
         const powerplant = powerplants[player.bureaucracy.toPower[i]]
@@ -71,29 +71,29 @@ export function power(G, ctx) {
         }
     }
     if (player.bureaucracy.toPower.some(p => powerplants[p].resource === 'coil')) {
-        ctx.events.setStage(COIL_STAGE)
+        events.setStage(COIL_STAGE)
     } else {
-        _endPower(G, ctx)
+        _endPower(G, playerID)
     }
 }
 
-export function spendCoil(G, ctx, coal, oil) {
-    G.players[ctx.playerID].resources['coal'] -= coal
-    G.players[ctx.playerID].resources['oil'] -= oil
-    _endPower(G, ctx)
+export function spendCoil({G, playerID}, coal, oil) {
+    G.players[playerID].resources['coal'] -= coal
+    G.players[playerID].resources['oil'] -= oil
+    _endPower(G, playerID)
 }
 
-export function clearToPower(G, ctx) {
-    G.players[ctx.playerID].bureaucracy.toPower = []
-    G.players[ctx.playerID].bureaucracy.poweredCount = 0
+export function clearToPower({G, playerID}) {
+    G.players[playerID].bureaucracy.toPower = []
+    G.players[playerID].bureaucracy.poweredCount = 0
 }
 
-export function passPowering(G, ctx) {
-    G.players[ctx.playerID].bureaucracy.poweredCount = 0
-    _endPower(G, ctx)
+export function passPowering({G, playerID}) {
+    G.players[playerID].bureaucracy.poweredCount = 0
+    _endPower(G, playerID)
 }
 
-export function endBureaucracy(G, ctx) {
+export function endBureaucracy({G, ctx, events, random}) {
     /************************
      *   CHECK FOR WINNER   *
      ************************/
@@ -130,7 +130,7 @@ export function endBureaucracy(G, ctx) {
             }
         }
         G.logs.push({move: 'endGame', winnerIDs: winnerIDs})
-        ctx.events.endGame({winnerIDs: winnerIDs})
+        events.endGame({winnerIDs: winnerIDs})
         return
     }
 
@@ -164,7 +164,7 @@ export function endBureaucracy(G, ctx) {
         G.powerplantMarket.sort((a,b) => a-b)
         // If we've drawn step 3, start the next step.
         if (G.powerplantMarket[7] === STEP_3) {
-            G.powerplantDeck = ctx.random.Shuffle(G.powerplantsStep3)
+            G.powerplantDeck = random.Shuffle(G.powerplantsStep3)
             G.logs.push({move: 'step', removed: G.powerplantMarket[0], step: 3})
             // Remove the most expensive and least expensive powerplants. Note that the most expensive will always
             //  be the step 3 card.

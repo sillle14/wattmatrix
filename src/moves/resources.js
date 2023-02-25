@@ -2,7 +2,7 @@ import { INVALID_MOVE } from 'boardgame.io/core'
 
 import PlayerModel from '../models/player'
 
-export function selectResource(G, ctx, resource) {
+export function selectResource({G, ctx}, resource) {
     G.selectedResources[resource] += 1
 
     const capacity = PlayerModel.getExtraCapacity(G.players[ctx.currentPlayer])
@@ -46,12 +46,12 @@ export function selectResource(G, ctx, resource) {
     G.resourceCost = resourceCost
 }
 
-export function clearResources(G, ctx) {
+export function clearResources({G}) {
     G.selectedResources = {coal: 0, oil: 0, trash: 0, uranium: 0}
     G.resourceCost = 0
 }
 
-export function buyResources(G, ctx) {
+export function buyResources({G, ctx, events}) {
     G.logs.push({playerID: ctx.currentPlayer, move: 'buyResources', resources: G.selectedResources, cost: G.resourceCost})
 
     for (const r in G.selectedResources) {
@@ -70,5 +70,5 @@ export function buyResources(G, ctx) {
     G.players[ctx.currentPlayer].money -= G.resourceCost
     G.selectedResources = {coal: 0, oil: 0, trash: 0, uranium: 0}
     G.resourceCost = 0
-    ctx.events.endTurn()
+    events.endTurn()
 }
