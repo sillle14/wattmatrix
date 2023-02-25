@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react';
 import { Tab, Tabs } from '@material-ui/core/'
 
 import { 
@@ -23,7 +23,7 @@ import ResourceMarket from './resourceMarket'
 
 import './styles/board.css'
 
-export class WattMatrixTable extends React.Component {
+export class WattMatrixTable extends Component {
 
     constructor(props) {
         super(props)

@@ -1,5 +1,5 @@
 import { GraphView } from 'react-digraph'
-import React from 'react'
+import { createRef, Component } from 'react';
 
 import { cities, houseCosts } from '../static/cities'
 import { edges } from '../static/edges'
@@ -104,13 +104,13 @@ const regions = {
 
 
 
-export default class Map extends React.Component {
+export default class Map extends Component {
 
     constructor(props) {
         super(props);
         this.renderNode = this.renderNode.bind(this)
         this.renderBackground = this.renderBackground.bind(this)
-        this.graphView = React.createRef()
+        this.graphView = createRef()
         this.state = {layoutEngineType: 0}
     }
 

@@ -1,5 +1,5 @@
 import { Button, Slider } from '@material-ui/core'
-import React from 'react'
+import { Component } from 'react';
 
 import { ResourceName } from './names'
 
@@ -8,7 +8,7 @@ import './styles/slider.css'
 /**
  * Slider object for choosing between coal and oil.
  */
-export class CoilSlider extends React.Component {
+export class CoilSlider extends Component {
     constructor(props) {
         super(props);
         this.state = {coal: 0};

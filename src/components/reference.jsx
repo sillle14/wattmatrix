@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { payment, playerSettings } from '../static/reference'
 import { PlayerName } from './names'
 

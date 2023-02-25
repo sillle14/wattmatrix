@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PowerPlant from './powerplant'
 
 import './styles/market.css'

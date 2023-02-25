@@ -1,5 +1,3 @@
-import React from 'react'
-
 import './styles/tabs.css'
 
 export function TabPanel(props) {
