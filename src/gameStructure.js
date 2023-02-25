@@ -97,7 +97,7 @@ export const gamePhases = {
     },
     [BUREAUCRACY]: {
         onBegin: bureaucracy.startBureaucracy,
-        endIf: G => Object.values(G.players).every(p => p.bureaucracy.hasPowered),
+        endIf: ({G}) => Object.values(G.players).every(p => p.bureaucracy.hasPowered),
         moves: {
             selectToPower: bureaucracy.selectToPower,
             passPowering: bureaucracy.passPowering,
