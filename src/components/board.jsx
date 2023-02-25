@@ -74,7 +74,16 @@ export class WattMatrixTable extends Component {
         return (
             <div className="board">
                 <div className="main" id={'main-' + (this.props.playerID || 'spec')}>
-                    <Tabs className="tabs" value={this.state.tab} onChange={(e, tab) => {this.switchToTab(tab)}} centered>{tabs}</Tabs>
+                    <Tabs 
+                        className="tabs" 
+                        value={this.state.tab} 
+                        onChange={(e, tab) => {this.switchToTab(tab)}} 
+                        centered
+                        indicatorColor="secondary"
+                        textColor="inherit"
+                    >
+                        {tabs}
+                    </Tabs>
                     <TabPanel tab={MAP} currentTab={this.state.tab}>
                         <Map 
                             cityStatus={this.props.G.cityStatus}
