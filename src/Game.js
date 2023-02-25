@@ -7,14 +7,14 @@ import PlayerModel from './models/player'
 
 
 
-function setup(ctx, setupData) {
+function setup({ctx, random}) {
     let cityStatus = {}
     for (const city in cities) {
         cityStatus[city] = [null, null, null]
     }
     let players = {}
     for (let i = 0; i < ctx.numPlayers; i++) {
-        players[i] = new PlayerModel()
+        players[i] = PlayerModel.new()
     }
     let coalMarket = []
     let oilMarket = []
@@ -43,14 +43,14 @@ function setup(ctx, setupData) {
         }
     }
     // Shuffle the deck and randomly remove powerplants according to the number of players.
-    powerplantDeck = ctx.random.Shuffle(powerplantDeck)
+    powerplantDeck = random.Shuffle(powerplantDeck)
     powerplantDeck.splice(0, playerSettings[ctx.numPlayers].remove)
 
     // Add 13 to the top of the deck, and the step 3 card to the back. Note that we draw off the end of the array.
     powerplantDeck.push(13)
     powerplantDeck.unshift(STEP_3)
 
-    const playerOrder = getPlayerOrder(players, ctx.random.Shuffle)
+    const playerOrder = getPlayerOrder(players, random.Shuffle)
 
     return {
         cityStatus: cityStatus, 
