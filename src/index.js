@@ -1,6 +1,6 @@
 import { Lobby } from 'boardgame.io/react'
 import { StrictMode } from 'react';
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client';
 
 import { WattMatrix } from './Game'
 import { WattMatrixTable } from './components/board'
@@ -10,17 +10,18 @@ import './components/styles/lobby.css'
 import './index.css'
 
 const NO_LOBBY = process.env.REACT_APP_NO_LOBBY
+const container = document.getElementById('root');
+const root = createRoot(container);
 
 if (NO_LOBBY) {
   // Code for local deployment no lobby both players on one screen, no seperate server.
-  ReactDOM.render(
+  root.render(
     <StrictMode>
       {/* <WattMatrixClient playerID={null}/> */}
       <WattMatrixClient playerID='0'/>
       <WattMatrixClient playerID='1'/>
       <WattMatrixClient playerID='2'/>
-    </StrictMode>,
-    document.getElementById('root')
+    </StrictMode>
   );
 } else {
   const ENV = process.env.REACT_APP_ENV
@@ -33,14 +34,13 @@ if (NO_LOBBY) {
   }
 
   // Render the lobby. This relies on a running server.
-  ReactDOM.render(
+  root.render(
     <StrictMode>
       <Lobby
         gameServer={SERVER}
         lobbyServer={SERVER}
         gameComponents={[{game: WattMatrix, board: WattMatrixTable}]}
       />
-    </StrictMode>,
-    document.getElementById('root')
+    </StrictMode>
   )
 }
