@@ -1,4 +1,4 @@
-import { Button, Slider } from '@material-ui/core'
+import { Button, Slider } from '@mui/material'
 import { Component } from 'react';
 
 import { ResourceName } from './names'

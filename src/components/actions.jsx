@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 
 import { AUCTION, BUREAUCRACY, CITY, COIL_STAGE, DISCARD_PP, REGIONS, RESOURCE } from '../gameStructure'
 import { Bidder } from './bidder'

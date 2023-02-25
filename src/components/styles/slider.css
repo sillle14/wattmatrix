@@ -31,7 +31,8 @@
 
 .slider-track {
     background-color: black !important;
-    height: 4px !important
+    height: 4px !important;
+    border: none !important;
 }
 
 .slider-thumb {
