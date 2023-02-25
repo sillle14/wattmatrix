@@ -157,11 +157,11 @@ export function buyCities({G, ctx, events}) {
     events.endTurn()
 }
 
-export function endCities({G, ctx}) {
+export function endCities({G, ctx, random}) {
     // Remove too small powerplants from the game. 
     while (G.powerplantMarket[0] <= Math.max(...Object.values(G.players).map(p => p.cities.length))) {
         G.logs.push({move: 'removePP', removed: G.powerplantMarket[0]})
-        removeLowest(G, ctx)
+        removeLowest({G, random})
     }
 
     // Enter Step 2 if any player has bought enough cities.
@@ -169,7 +169,7 @@ export function endCities({G, ctx}) {
         G.logs.push({move: 'step', removed: G.powerplantMarket[0], step: 2})
         G.step = 2
         // Remove the lowest powerplant from the game.
-        removeLowest(G, ctx)
+        removeLowest({G, random})
     }
 
     // End the game if any player has enough cities.

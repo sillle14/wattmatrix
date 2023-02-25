@@ -54,7 +54,7 @@ export function startBidding({G, ctx}) {
 
 // Called after a bid or pass from within the auction. Sets the next player to bid if any remain, otherwise
 //  sells the PP to the highest bidder, reseting the auction.
-function afterBid({G, ctx, events}) {
+function afterBid({G, ctx, events, random}) {
     // If there is only one player left in the auction, they win!
     const playersLeft = Object.keys(G.players).filter(playerID => G.players[playerID].inAuction)
     if (playersLeft.length === 1) {
@@ -73,7 +73,7 @@ function afterBid({G, ctx, events}) {
         } else {
             // Buy the PP.
             G.players[winningID].powerplants.push(G.auction.upForAuction)
-            afterBuy(G, ctx)
+            afterBuy({G, events, random})
         }
     } else {
         // Otherwise, just pass the bidding to the next player in a clockwise fashion.
@@ -91,7 +91,7 @@ function afterBid({G, ctx, events}) {
 }
 
 // After a player buys a PP or passes, set the turn to the next player, or end the phase.
-function afterBuy({G, ctx, events, random}) {
+function afterBuy({G, events, random}) {
     // Remove and replace the bought PP, if any.
     if (G.auction.upForAuction) {
         // Remove the powerplant from the market, replace it, and resort it.
@@ -130,32 +130,32 @@ function afterBuy({G, ctx, events, random}) {
     }
 }
 
-export function makeBid({G, ctx}, bid) {
+export function makeBid({G, ctx, events, random}, bid) {
     if (bid <= G.auction.currentBid) {
         return INVALID_MOVE
     }
     G.auction.currentBid = bid
     G.logs.push({playerID: ctx.currentPlayer, move: 'bid', bid: bid})
-    afterBid(G, ctx)
+    afterBid({G, ctx, events, random})
 }
 
-export function passBid({G, ctx}) {
+export function passBid({G, ctx, events, random}) {
     G.players[ctx.currentPlayer].inAuction = false
     G.logs.push({playerID: ctx.currentPlayer, move: 'passAuction'})
-    afterBid(G, ctx)
+    afterBid({G, ctx, events, random})
 }
 
-export function passBuyPP({G, ctx}) {
+export function passBuyPP({G, ctx, events, random}) {
     G.players[ctx.currentPlayer].boughtPP = true
     G.logs.push({playerID: ctx.currentPlayer, move: 'pass'})
-    afterBuy(G, ctx)
+    afterBuy({G, events, random})
 }
 
-export function afterAuction({G, ctx}) {
+export function afterAuction({G, random}) {
     // If all players passed, remove the lowest powerplant.
     if (G.auction.allPass) {
         G.logs.push({move: 'removePP', removed: G.powerplantMarket[0], allPass: true})
-        removeLowest(G, ctx)
+        removeLowest({G, random})
     }
     // Re-calculate player order if it is the first turn.
     if (G.firstTurn) {
@@ -185,7 +185,7 @@ export function selectToDiscard({G}, powerplant) {
     }
 }
 
-export function discardPP({G, ctx, events}) {
+export function discardPP({G, ctx, events, random}) {
     // Buy the PP, replacing the PP to discard with the new one.
     const activePlayer = Object.keys(ctx.activePlayers)[0]
     G.players[activePlayer].powerplants[G.players[activePlayer].powerplants.indexOf(G.auction.toDiscard)] = G.auction.upForAuction
@@ -235,10 +235,10 @@ export function discardPP({G, ctx, events}) {
     }
 
     events.endStage()
-    afterBuy(G, ctx)
+    afterBuy({G, events, random})
 }
 
-export function discardResources({G, ctx, events}, coal, oil) {
+export function discardResources({G, ctx, events, random}, coal, oil) {
     const activePlayer = Object.keys(ctx.activePlayers)[0]
     if (coal > 0) {
         G.logs.push({playerID: activePlayer, move: 'discard', resource: 'coal', count: coal})
@@ -249,5 +249,5 @@ export function discardResources({G, ctx, events}, coal, oil) {
         G.players[activePlayer].resources.oil -= oil
     }
     events.endStage()
-    afterBuy(G, ctx)
+    afterBuy({G, events, random})
 }
