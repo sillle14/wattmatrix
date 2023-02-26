@@ -34,19 +34,6 @@ const EdgeTypes = {
 
 const innerRadius = 18
 
-function CitySpace({x, y, cost}) {
-    return <>
-        <circle cx={x} cy={y} r={innerRadius} fill="lightgrey" stroke="black"></circle>
-        <text x={x} y={y} textAnchor="middle" fill="black" alignmentBaseline="central" fontSize="21">{cost}</text>
-    </>
-}
-
-const cityPosition = {
-    10: {x: 50, y: 23},
-    15: {x: 25, y: 52},
-    20: {x: 75, y: 52}
-}
-
 function CityDef() {
     const cityPosition = {
         10: {x: 50, y: 23},
@@ -102,7 +89,7 @@ const renderNodeText = (data, id, isSelected) => {
     )
 }
 
-export default function Map({regions, pickRegions, myTurn, selectRegion}) {
+export default function Map({regions, pickRegions, myTurn, selectRegion, selectedCities}) {
     const Viewer = useRef(null);
     const GraphRef = useRef(null)
 
@@ -134,6 +121,13 @@ export default function Map({regions, pickRegions, myTurn, selectRegion}) {
         handleResize()
     }, [])
 
+    const cityComps = Object.values(cities).map(city => {
+        const inPlay = regions.includes(city.region)
+        const selected = selectedCities.includes(city.id) && myTurn
+        const usePointer = false
+        return <City key={city.id} data={city} inPlay={inPlay} selected={selected} usePointer={usePointer}/>
+    })
+
     return <div className="graph" ref={GraphRef}>
         <ReactSVGPanZoom
             ref={Viewer}
@@ -153,7 +147,7 @@ export default function Map({regions, pickRegions, myTurn, selectRegion}) {
         <svg viewBox="-150 -150 2300 1000">
             <defs><CitySlotsDef/></defs>
             <Regions activeRegions={regions} pickable={pickRegions && myTurn} selectRegion={selectRegion}/>
-            <City data={cities['Seattle']} inPlay={true} selected={false} usePointer={false}/>
+            {cityComps}
         </svg>
       </ReactSVGPanZoom>
     </div>

@@ -19,8 +19,8 @@ if (NO_LOBBY) {
     <StrictMode>
       {/* <WattMatrixClient playerID={null}/> */}
       <WattMatrixClient playerID='0'/>
-      {/* <WattMatrixClient playerID='1'/>
-      <WattMatrixClient playerID='2'/> */}
+      <WattMatrixClient playerID='1'/>
+      <WattMatrixClient playerID='2'/>
     </StrictMode>
   );
 } else {
