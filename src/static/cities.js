@@ -1,5 +1,5 @@
 export const cities = {
-    Seattle: {id: 'Seattle', region: 'northwest', x: 50, y: 0},
+    Seattle: {id: 'Seattle', region: 'northwest', x: 0, y: -50},
     Portland: {id: 'Portland', region: 'northwest', x: 0, y: 125},
     Boise: {id: 'Boise', region: 'northwest', x: 250, y: 200},
     Billings: {id: 'Billings', region: 'northwest', x: 550, y: 100},
@@ -43,4 +43,10 @@ export const cities = {
     Boston: {id: 'Boston', region: 'northeast', x: 2020, y: 200}
 }
 
-export const houseCosts = [10, 15, 20]
+export const cityPositions = {
+    10: {x: 50, y: 23},
+    15: {x: 25, y: 52},
+    20: {x: 75, y: 52}
+}
+
+export const houseCosts = Object.keys(cityPositions)

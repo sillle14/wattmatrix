@@ -13,6 +13,7 @@
     "react-digraph": "7.0.0",
     "react-dom": "^18.2.0",
     "react-scroll": "^1.8.0",
+    "react-svg-pan-zoom": "^3.12.1",
     "redux-logger": "^3.0.6"
   },
   "scripts": {

@@ -16,7 +16,7 @@ import { Logs } from './logs'
 import { Players, Player}  from './players'
 import { TabLabel, TabPanel } from './tabHelpers'
 import ActionBar from './actions'
-import Map from './map'
+import Map from './newMap'
 import Market from './market'
 import Reference from './reference'
 import ResourceMarket from './resourceMarket'
@@ -28,7 +28,6 @@ export class WattMatrixTable extends Component {
     constructor(props) {
         super(props)
         this.playerMap = {}
-        console.log(this.props.matchData)
         if (this.props.matchData) {
             for (let i = 0; i < this.props.matchData.length; i ++) {
                 if (this.props.matchData[i].name) {
