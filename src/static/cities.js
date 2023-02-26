@@ -49,4 +49,4 @@ export const cityPositions = {
     20: {x: 75, y: 52}
 }
 
-export const houseCosts = Object.keys(cityPositions)
+export const houseCosts = Object.keys(cityPositions).map(cost => parseInt(cost))
