@@ -49,4 +49,6 @@ export const cityPositions = {
     20: {x: 75, y: 52}
 }
 
-export const houseCosts = Object.keys(cityPositions).map(cost => parseInt(cost))
+export const subCityRadius = 18;
+
+export const houseCosts = [10, 15, 20]

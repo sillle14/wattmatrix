@@ -3,8 +3,6 @@ import { ReactSVGPanZoom, INITIAL_VALUE, fitToViewer, ALIGN_LEFT, ALIGN_TOP } fr
 
 
 import { cities } from '../static/cities'
-import { edges } from '../static/edges'
-import { playerColors } from '../static/playerColors'
 import City from './mapElements/city';
 import CitySlotsDef from './mapElements/citySlotsDef';
 import Regions from './mapElements/regions';
@@ -32,19 +30,16 @@ const EdgeTypes = {
     }
 }
 
-const innerRadius = 18
-
-const doNothing = () => {}
-// I want this text to be on top of edges...https://github.com/uber/react-digraph/issues/213
-const renderNodeText = (data, id, isSelected) => {
-    return (
-        <text textAnchor="middle">
-            <tspan x="0" dy="36" fontSize="20">{data.id}</tspan>
-        </text>
-    )
-}
-
-export default function Map({regions, pickRegions, myTurn, selectRegion, selectedCities, selectCity, cityPhase}) {
+export default function Map({
+    regions, 
+    pickRegions,
+    myTurn, 
+    selectRegion, 
+    selectedCities, 
+    selectCity, 
+    cityPhase, 
+    cityStatus
+}) {
     const Viewer = useRef(null);
     const GraphRef = useRef(null)
 
@@ -80,12 +75,14 @@ export default function Map({regions, pickRegions, myTurn, selectRegion, selecte
         const inPlay = regions.includes(city.region)
         const selected = selectedCities.includes(city.id) && myTurn
         const usePointer = myTurn && cityPhase && regions.includes(city.region)
+        const houses = cityStatus[city.id]
         return <City key={city.id} 
             data={city} 
             inPlay={inPlay} 
             selected={selected} 
             usePointer={usePointer}
             selectCity={selectCity}
+            houses={houses}
         />
     })
 
@@ -97,7 +94,7 @@ export default function Map({regions, pickRegions, myTurn, selectRegion, selecte
             background="white"
             tool="auto"
             value={value}
-            onChangeTool={doNothing}
+            onChangeTool={() => {}}
             onChangeValue={setValue}
             miniatureProps={{position: 'none'}}
             toolbarProps={{position: 'none'}}
