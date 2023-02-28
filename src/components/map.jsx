@@ -89,8 +89,7 @@ export default function Map({
             <defs><CitySlotsDef/></defs>
             <Regions activeRegions={regions} pickable={pickRegions && myTurn} selectRegion={selectRegion}/>
             {edgeComps}
-            {/* TODO: [] if pick regions */}
-            {pickRegions ? cityComps : cityComps}
+            {cityComps}
         </svg>
       </ReactSVGPanZoom>
     </div>
