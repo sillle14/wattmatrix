@@ -3,32 +3,13 @@ import { ReactSVGPanZoom, INITIAL_VALUE, fitToViewer, ALIGN_LEFT, ALIGN_TOP } fr
 
 
 import { cities } from '../static/cities'
+import { edges } from '../static/edges';
 import City from './mapElements/city';
 import CitySlotsDef from './mapElements/citySlotsDef';
+import Edge from './mapElements/edge';
 import Regions from './mapElements/regions';
 
-
 import './styles/map.css'
-
-const regionColors = {
-    northwest: '#f2bfff',
-    southwest: '#42e6f5',
-    texas: '#ffa699',
-    midwest: '#f8ff94',
-    southeast: '#9beba1',
-    northeast: '#e8c87d',
-}
-
-const EdgeTypes = {
-    edge: { 
-        shapeId: "#edge",
-        shape: (
-            <symbol viewBox="0 0 50 50" id="edge" key="0">
-            <circle cx="25" cy="25" r="4" stroke="lightgrey" fill="currentColor"> </circle>
-            </symbol>
-        )
-    }
-}
 
 export default function Map({
     regions, 
@@ -86,6 +67,8 @@ export default function Map({
         />
     })
 
+    const edgeComps = edges.map((edge, idx) => <Edge edge={edge} key={idx} />)
+
     return <div className="graph" ref={GraphRef}>
         <ReactSVGPanZoom
             ref={Viewer}
@@ -105,7 +88,9 @@ export default function Map({
         <svg viewBox="-150 -150 2300 1000">
             <defs><CitySlotsDef/></defs>
             <Regions activeRegions={regions} pickable={pickRegions && myTurn} selectRegion={selectRegion}/>
-            {pickRegions ? [] : cityComps}
+            {edgeComps}
+            {/* TODO: [] if pick regions */}
+            {pickRegions ? cityComps : cityComps}
         </svg>
       </ReactSVGPanZoom>
     </div>

@@ -16,7 +16,6 @@ export default function City ({data, inPlay, selected, usePointer, selectCity, h
     })
 
     return <svg 
-        viewBox="0 0 100 100" 
         height="100"
         width="100" 
         style={style}
