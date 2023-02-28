@@ -1,6 +1,6 @@
 {
   "name": "wattmatrix",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -45,7 +45,9 @@
   "module": "dist/main.js",
   "babel": {
     "presets": [
-      "@babel/react"
+      ["@babel/preset-react", {
+        "runtime": "automatic"
+      }]
     ],
     "plugins": [
       [
