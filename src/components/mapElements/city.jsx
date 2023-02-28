@@ -25,7 +25,7 @@ export default function City ({data, inPlay, selected, usePointer, selectCity, h
     >
         <circle cx="50" cy="50" r="50" fill={fill}/>
         <use xlinkHref="#city-slots"/>
-        <text textAnchor="middle" x="50" y="87" fontSize="22" cursor={textCursor}>{data.id}</text>
+        <text textAnchor="middle" x="50" y="90" fontSize="22" cursor={textCursor} fontWeight="bold">{data.id}</text>
         {houseComps}
     </svg>
 }
