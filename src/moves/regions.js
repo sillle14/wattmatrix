@@ -24,7 +24,7 @@ function checkConnected(regions) {
     return true
 }
 
-export function selectRegion(G, ctx, region) {
+export function selectRegion({G}, region) {
     // If already selected, unselect.
     if (G.regions.includes(region)) {
         G.regions.splice(G.regions.indexOf(region), 1)
@@ -39,11 +39,11 @@ export function selectRegion(G, ctx, region) {
     }
 }
 
-export function clear(G, ctx) {
+export function clear({G}) {
     G.regions = []
 }
 
-export function confirm(G, ctx) {
+export function confirm({G, events}) {
     G.logs.push({move: 'selectRegions', regions: G.regions})
-    ctx.events.endPhase()
+    events.endPhase()
 }

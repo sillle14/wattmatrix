@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { playerColors } from '../static/playerColors'
 
 import './styles/names.css'

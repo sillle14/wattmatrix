@@ -19,7 +19,7 @@ function playerSortScore(player) {
 /**
  * Generic pass move.
  */
-export function pass(G, ctx) {
+export function pass({G, ctx, events}) {
     G.logs.push({playerID: ctx.currentPlayer, move: 'pass'})
-    ctx.events.endTurn()
+    events.endTurn()
 }

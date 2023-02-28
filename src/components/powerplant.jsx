@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { powerplants, STEP_3 } from '../static/powerplants'
 
 import './styles/powerplant.css'

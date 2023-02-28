@@ -1,5 +1,5 @@
 import { animateScroll } from 'react-scroll'
-import React from 'react'
+import { createRef, Component } from 'react';
 
 import { payment, playerSettings } from '../static/reference'
 import { PlayerName, ResourceName } from './names' 
@@ -115,11 +115,11 @@ function Log(props) {
     return <div>{details}</div>
 }
 
-export class Logs extends React.Component {
+export class Logs extends Component {
 
     constructor(props) {
         super(props);
-        this.bottom = React.createRef();
+        this.bottom = createRef();
     }
 
     scrollToBottom = () => {

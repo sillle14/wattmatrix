@@ -42,7 +42,7 @@ function getMST(nodeMap) {
     return cost
 }
 
-export function selectCity(G, ctx, city) {
+export function selectCity({G, ctx}, city) {
     if (!G.regions.includes(cities[city].region)) {
         return INVALID_MOVE
     }
@@ -126,7 +126,7 @@ export function selectCity(G, ctx, city) {
     }
 }
 
-export function clearCities(G, ctx) {
+export function clearCities({G}) {
     const toRerender = Object.keys(G.selectedCities)
     G.selectedCities = {}
     G.connectionCost = 0
@@ -136,7 +136,7 @@ export function clearCities(G, ctx) {
     G.rerender.activate = !G.rerender.activate
 }
 
-export function buyCities(G, ctx) {
+export function buyCities({G, ctx, events}) {
     let totalCost = G.connectionCost
     for (const city in G.selectedCities) {
         G.players[ctx.currentPlayer].cities.push(city)
@@ -154,14 +154,14 @@ export function buyCities(G, ctx) {
     // Force the selected city to rerender
     G.rerender.cities = toRerender
     G.rerender.activate = !G.rerender.activate
-    ctx.events.endTurn()
+    events.endTurn()
 }
 
-export function endCities(G, ctx) {
+export function endCities({G, ctx, random}) {
     // Remove too small powerplants from the game. 
     while (G.powerplantMarket[0] <= Math.max(...Object.values(G.players).map(p => p.cities.length))) {
         G.logs.push({move: 'removePP', removed: G.powerplantMarket[0]})
-        removeLowest(G, ctx)
+        removeLowest({G, random})
     }
 
     // Enter Step 2 if any player has bought enough cities.
@@ -169,7 +169,7 @@ export function endCities(G, ctx) {
         G.logs.push({move: 'step', removed: G.powerplantMarket[0], step: 2})
         G.step = 2
         // Remove the lowest powerplant from the game.
-        removeLowest(G, ctx)
+        removeLowest({G, random})
     }
 
     // End the game if any player has enough cities.
@@ -180,7 +180,7 @@ export function endCities(G, ctx) {
     }
 }
 
-export function removeLowest(G, ctx) {
+export function removeLowest({G, random}) {
     // Remove the lowest powerplant from the game.
     const nextPlant = G.powerplantDeck.pop()
     if (nextPlant) {
@@ -192,7 +192,7 @@ export function removeLowest(G, ctx) {
 
     // If we've drawn step 3, start the next step.
     if (G.step < 3 && G.powerplantMarket[7] === STEP_3) {
-        G.powerplantDeck = ctx.random.Shuffle(G.powerplantsStep3)
+        G.powerplantDeck = random.Shuffle(G.powerplantsStep3)
         G.logs.push({move: 'step', removed: G.powerplantMarket[0], step: 3})
         // Remove the most expensive and least expensive powerplants. Note that the most expensive will always
         //  be the step 3 card.

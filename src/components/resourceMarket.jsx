@@ -1,5 +1,3 @@
-import React from 'react'
-
 import './styles/resourceMarket.css'
 import './styles/symbols.css'
 

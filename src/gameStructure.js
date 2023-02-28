@@ -10,9 +10,9 @@ import { pass } from './moves/common'
 // Turn order constant to have each player make one move in reverse player order.
 const REVERSE_ONCE = {
     order: {
-        first: (G, ctx) => ctx.playOrder.length - 1,
-        next: (G, ctx) => {if (ctx.playOrderPos > 0) { return ctx.playOrderPos - 1}},
-        playOrder: (G, ctx) => G.playerOrder
+        first: ({ctx}) => ctx.playOrder.length - 1,
+        next: ({ctx}) => {if (ctx.playOrderPos > 0) { return ctx.playOrderPos - 1}},
+        playOrder: ({G}) => G.playerOrder
     }
 }
 
@@ -35,7 +35,7 @@ export const DISCARD_RESOURCES = 'discardResources'
 
 export const gamePhases = {
     [REGIONS]: {
-        onBegin: (G, ctx) => {G.tab = MAP},
+        onBegin: ({G}) => {G.tab = MAP},
         start: true,
         moves: {
             selectRegion: region.selectRegion,
@@ -47,7 +47,7 @@ export const gamePhases = {
     [AUCTION]: {
         onBegin: auction.startAuction,  
         turn: {
-            order: {first: G => parseInt(G.playerOrder[0])},
+            order: {first: ({G}) => parseInt(G.playerOrder[0])},
             stages: {
                 [DISCARD_PP]: {
                     moves: {
@@ -73,7 +73,7 @@ export const gamePhases = {
         next: RESOURCE,
     },
     [RESOURCE]: {
-        onBegin: (G, ctx) => {G.logs.push({move: 'startPhase', phase: 'Buy Resources'}); G.tab = MARKETS},
+        onBegin: ({G}) => {G.logs.push({move: 'startPhase', phase: 'Buy Resources'}); G.tab = MARKETS},
         moves: {
             selectResource: resourceMoves.selectResource,
             clearResources: resourceMoves.clearResources,
@@ -84,7 +84,7 @@ export const gamePhases = {
         next: CITY
     },
     [CITY]: {
-        onBegin: (G, ctx) => {G.logs.push({move: 'startPhase', phase: 'Buy Cities'}); G.tab = MAP},
+        onBegin: ({G}) => {G.logs.push({move: 'startPhase', phase: 'Buy Cities'}); G.tab = MAP},
         moves: {
             selectCity: cityMoves.selectCity,
             clearCities: cityMoves.clearCities,
@@ -97,7 +97,7 @@ export const gamePhases = {
     },
     [BUREAUCRACY]: {
         onBegin: bureaucracy.startBureaucracy,
-        endIf: G => Object.values(G.players).every(p => p.bureaucracy.hasPowered),
+        endIf: ({G}) => Object.values(G.players).every(p => p.bureaucracy.hasPowered),
         moves: {
             selectToPower: bureaucracy.selectToPower,
             passPowering: bureaucracy.passPowering,

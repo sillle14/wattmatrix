@@ -1,12 +1,12 @@
-import { Button } from '@material-ui/core'
-import React from 'react'
+import { Button } from '@mui/material'
+import { Component } from 'react';
 
 import './styles/bidder.css'
 
 /**
  * Control element for bidding on powerplants
  */
-export class Bidder extends React.Component {
+export class Bidder extends Component {
     constructor(props) {
         super(props);
         this.state = {bid: parseInt(props.currentBid) + 1};
